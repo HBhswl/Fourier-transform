@@ -1,11 +1,12 @@
-﻿  FFT2.cpp
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\sal.h(2361): error C2059: 语法错误:“字符串”
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\sal.h(2361): error C2143: 语法错误: 缺少“;”(在“{”的前面)
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\include\sal.h(2361): error C2447: “{”: 缺少函数标题(是否是老式的形式表?)
-D:\My_code\C++\Fourier-transform\FFT\FFT\FFT2.cpp(47): error C3861: “memcpy”: 找不到标识符
-D:\My_code\C++\Fourier-transform\FFT\FFT\FFT2.cpp(52): error C3861: “memcpy”: 找不到标识符
-D:\My_code\C++\Fourier-transform\FFT\FFT\FFT2.cpp(54): error C3861: “memcpy”: 找不到标识符
-D:\My_code\C++\Fourier-transform\FFT\FFT\FFT2.cpp(58): error C3861: “memcpy”: 找不到标识符
-D:\My_code\C++\Fourier-transform\FFT\FFT\FFT2.cpp(63): error C3861: “memcpy”: 找不到标识符
-D:\My_code\C++\Fourier-transform\FFT\FFT\FFT2.cpp(65): error C3861: “memcpy”: 找不到标识符
-D:\My_code\C++\Fourier-transform\FFT\FFT\FFT2.cpp(69): error C3861: “memcpy”: 找不到标识符
+﻿  main.cpp
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(23): warning C4566: 由通用字符名称“\uFFFD”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(23): warning C4566: 由通用字符名称“\u0678”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(23): warning C4566: 由通用字符名称“\u04B6”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(23): warning C4566: 由通用字符名称“\u03AA”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(31): warning C4566: 由通用字符名称“\uFFFD”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(31): warning C4566: 由通用字符名称“\u03AA”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(61): warning C4566: 由通用字符名称“\uFFFD”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(61): warning C4566: 由通用字符名称“\u0678”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(61): warning C4566: 由通用字符名称“\u04B6”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(61): warning C4566: 由通用字符名称“\u03AA”表示的字符不能在当前代码页(936)中表示出来
+  FFT.vcxproj -> D:\My_code\C++\Fourier-transform\FFT\Debug\FFT.exe

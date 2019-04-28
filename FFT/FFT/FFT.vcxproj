@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FFT1.cpp" />
+    <ClCompile Include="FFT2.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

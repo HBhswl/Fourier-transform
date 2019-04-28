@@ -2,9 +2,9 @@
 
 void test_dft2() {
 	int width = 4;
-	int height = 3;
+	int height = 4;
 
-	double mat[] = { 1, 1, 3, 2, 3, 4, 123, 154, 55, 2, 22, 233 };
+	double mat[] = { 1, 1, 3, 2, 3, 4, 123, 154, 55, 2, 22, 233, 5, 6, 2, 7 };
 
 	DFT2 dft2;
 	dft2.dft2(mat, width, height);

@@ -1,5 +1,5 @@
 ﻿  test_dft2.cpp
-D:\My_code\C++\DFT\DFT\test_dft2.cpp(27): warning C4473: “printf”: 没有为格式字符串传递足够的参数
-  D:\My_code\C++\DFT\DFT\test_dft2.cpp(27): note: 占位符和其参数预计 4 可变参数，但提供的却是 3 参数
-  D:\My_code\C++\DFT\DFT\test_dft2.cpp(27): note: 缺失的可变参数 4 为格式字符串“%lf”所需
-  DFT.vcxproj -> D:\My_code\C++\DFT\Debug\DFT.exe
+D:\My_code\C++\Fourier-transform\DFT\DFT\test_dft2.cpp(27): warning C4473: “printf”: 没有为格式字符串传递足够的参数
+  D:\My_code\C++\Fourier-transform\DFT\DFT\test_dft2.cpp(27): note: 占位符和其参数预计 4 可变参数，但提供的却是 3 参数
+  D:\My_code\C++\Fourier-transform\DFT\DFT\test_dft2.cpp(27): note: 缺失的可变参数 4 为格式字符串“%lf”所需
+  DFT.vcxproj -> D:\My_code\C++\Fourier-transform\DFT\Debug\DFT.exe
