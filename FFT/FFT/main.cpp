@@ -65,6 +65,11 @@ void test_fft2() {
 		else
 			printf("result[%d]: %lf + %lfi\n", i + 1, outVec[i].rl, outVec[i].im);
 	}
+	printf("11111 ��任���Ϊ��");
+	t.ifft(outVec, width, height, invert);
+	for (int i = 0; i < width * height; i++) {
+		printf("ifft[%d]: %lf\n", i + 1, invert[i].rl);
+	}
 }
 
 int main() {

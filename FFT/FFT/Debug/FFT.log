@@ -1,4 +1,5 @@
-﻿  main.cpp
+﻿  FFT2.cpp
+  main.cpp
 D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(23): warning C4566: 由通用字符名称“\uFFFD”表示的字符不能在当前代码页(936)中表示出来
 D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(23): warning C4566: 由通用字符名称“\u0678”表示的字符不能在当前代码页(936)中表示出来
 D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(23): warning C4566: 由通用字符名称“\u04B6”表示的字符不能在当前代码页(936)中表示出来
@@ -9,4 +10,7 @@ D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(61): warning C4566: 由通用�
 D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(61): warning C4566: 由通用字符名称“\u0678”表示的字符不能在当前代码页(936)中表示出来
 D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(61): warning C4566: 由通用字符名称“\u04B6”表示的字符不能在当前代码页(936)中表示出来
 D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(61): warning C4566: 由通用字符名称“\u03AA”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(68): warning C4566: 由通用字符名称“\uFFFD”表示的字符不能在当前代码页(936)中表示出来
+D:\My_code\C++\Fourier-transform\FFT\FFT\main.cpp(68): warning C4566: 由通用字符名称“\u03AA”表示的字符不能在当前代码页(936)中表示出来
+  正在生成代码...
   FFT.vcxproj -> D:\My_code\C++\Fourier-transform\FFT\Debug\FFT.exe
