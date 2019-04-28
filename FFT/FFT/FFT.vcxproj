@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{61B4BF3B-D78C-4315-B1A4-D01337AA71EC}</ProjectGuid>
+    <ProjectGuid>{56918F11-873A-4EFE-9A73-487EE73D22A9}</ProjectGuid>
     <RootNamespace>FFT</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FFT1.h" />
+    <ClInclude Include="FFT2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FFT1.cpp" />

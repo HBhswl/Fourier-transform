@@ -1,6 +1,7 @@
-#include "FFT1.h"
+ï»¿#include "FFT1.h"
 #include <string.h>
 #include <stdio.h>
+
 
 int main() {
 	double vec[] = { 15, 32, 9, 222, 118, 151, 5, 7, 56, 233, 56, 121, 235, 89, 98, 111 };
@@ -19,7 +20,7 @@ int main() {
 	t.fft(inVec, len, outVec);
 
 	// print result
-	printf("¿ìËÙ¸µÀïÒ¶±ä»»½á¹ûÎª£º\n");
+	printf("ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½Ò¶ï¿½ä»»ï¿½ï¿½ï¿½Îªï¿½ï¿½\n");
 	for (int i = 0; i < len; i++) {
 		if (outVec[i].im < 0)
 			printf("result[%d]: %lf - %lfi\n", i + 1, outVec[i].rl, -outVec[i].im);
@@ -27,7 +28,7 @@ int main() {
 			printf("result[%d]: %lf + %lfi\n", i + 1, outVec[i].rl, outVec[i].im);
 	}
 
-	printf("11111 Äæ±ä»»½á¹ûÎª£º");
+	printf("11111 ï¿½ï¿½ä»»ï¿½ï¿½ï¿½Îªï¿½ï¿½");
 	t.ifft(outVec, len, invert);
 	for (int i = 0; i < len; i++) {
 		printf("ifft[%d]: %lf\n", i + 1, invert[i].rl);
@@ -39,3 +40,4 @@ int main() {
 
 	return 0;
 }
+

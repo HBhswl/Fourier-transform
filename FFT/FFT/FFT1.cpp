@@ -1,9 +1,9 @@
-#include "FFT1.h"
+Ôªø#include "FFT1.h"
 #include <cstddef>
 #include <string.h>
 #include <math.h>
 
-FFT1::FFT1(void){
+FFT1::FFT1(void) {
 
 }
 
@@ -48,32 +48,31 @@ int FFT1::get_computation_layers(int num) {
 	}
 }
 
-bool FFT1::fft(Complex inVec[], int vecLen, Complex outVec[]) {	//  ‰»ÎœÚ¡ø£¨≥§∂»£¨ ‰≥ˆœÚ¡ø
+bool FFT1::fft(Complex inVec[], int vecLen, Complex outVec[]) {
 	if ((vecLen <= 0) || (NULL == inVec) || (NULL == outVec))
 		return false;
 	if (!is_power_of_two(vecLen))
 		return false;
 
-	Complex* pVec = new Complex[vecLen];
-	Complex* Weights = new Complex[vecLen];
-	Complex* X = new Complex[vecLen];
-	
+	Complex * pVec = new Complex[vecLen];
+	Complex * Weights = new Complex[vecLen];
+	Complex * X = new Complex[vecLen];
+
 	int* pnInvBits = new int[vecLen];
 	memcpy(pVec, inVec, vecLen * sizeof(Complex));
 
-	// º∆À„»®÷ÿ–Ú¡–
-	double fixed_factor = (-2 * PI) / vecLen;	// πÃ∂®µƒ“Ú◊”
+	double fixed_factor = (-2 * PI) / vecLen;
 	for (int i = 0; i < vecLen / 2; i++) {
 		double angle = i * fixed_factor;
 		Weights[i].rl = cos(angle);
 		Weights[i].im = sin(angle);
 	}
-	for (int i = vecLen / 2; i < vecLen; i++) {	// º∆À„»®÷ÿ
+	for (int i = vecLen / 2; i < vecLen; i++) {
 		Weights[i].rl = -(Weights[i - vecLen / 2].rl);
 		Weights[i].im = -(Weights[i - vecLen / 2].im);
 	}
 
-	int r = get_computation_layers(vecLen); // ∑÷÷ß ˜ø…“‘∑÷≥…º∏÷¶
+	int r = get_computation_layers(vecLen);
 
 	int index = 0;
 	for (int i = 0; i < vecLen; i++) {
@@ -98,7 +97,7 @@ bool FFT1::fft(Complex inVec[], int vecLen, Complex outVec[]) {	//  ‰»ÎœÚ¡ø£¨≥§∂
 			for (int n = 0; n < N / 2; n++) {
 				int index = n + mid;
 				int dist = index + distance;
-				pVec[index].rl = X[index].rl + (Weights[n * W].rl * X[dist].rl - Weights[n * W].im * X[dist].im);
+				pVec[index].rl = X[index].rl + Weights[n * W].rl * X[dist].rl - Weights[n * W].im * X[dist].im;
 				pVec[index].im = X[index].im + Weights[n * W].im * X[dist].rl + Weights[n * W].rl * X[dist].im;
 			}
 			for (int n = N / 2; n < N; n++) {
@@ -112,7 +111,7 @@ bool FFT1::fft(Complex inVec[], int vecLen, Complex outVec[]) {	//  ‰»ÎœÚ¡ø£¨≥§∂
 	}
 
 	memcpy(outVec, pVec, vecLen * sizeof(Complex));
-	if (Weights)      
+	if (Weights)
 		delete[] Weights;
 	if (X)
 		delete[] X;
@@ -149,7 +148,6 @@ bool FFT1::ifft(Complex inVec[], int len, Complex outVec[])
 		W_im[i] = -(W_im[i - len / 2]);
 	}
 
-	//  ±”Ú ˝æ›–¥»ÎX1
 	for (int i = 0; i < len; i++) {
 		X_rl[i] = inVec[i].rl;
 		X_im[i] = inVec[i].im;
@@ -175,11 +173,11 @@ bool FFT1::ifft(Complex inVec[], int len, Complex outVec[])
 			}
 			for (int n = N / 2; n < N; n++) {
 				int index = n + b * N;
-				X2_rl[index] = (X_rl[index] - X_rl[index - distance]) / 2;          
+				X2_rl[index] = (X_rl[index] - X_rl[index - distance]) / 2;
 				X2_im[index] = (X_im[index] - X_im[index - distance]) / 2;
 				double square = W_rl[n * W] * W_rl[n * W] + W_im[n * W] * W_im[n * W];
 				double part1 = X2_rl[index] * W_rl[n * W] + X2_im[index] * W_im[n * W];
-				double part2 = X2_im[index] * W_rl[n * W] - X2_rl[index] * W_im[n * W];	
+				double part2 = X2_im[index] * W_rl[n * W] - X2_rl[index] * W_im[n * W];
 				if (square > 0) {
 					X2_rl[index] = part1 / square;
 					X2_im[index] = part2 / square;
