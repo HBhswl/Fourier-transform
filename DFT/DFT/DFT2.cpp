@@ -42,8 +42,6 @@ void DFT2::clear_dft2_matrix() {
 
 void DFT2::print_matrix()
 {
-	char msg[2560] = "11111 ";
-
 	if ((!m_has_dft_matrix) || (NULL == m_dft2_matrix) || (m_dft_matrix_height <= 0) || (m_dft_matrix_width <= 0))
 		return;
 
@@ -79,6 +77,7 @@ bool DFT2::dft2(double matrix[], int width, int height) {
 	double fixed_factor_for_axisX = (-2 * PI) / height;
 	double fixed_factor_for_axisY = (-2 * PI) / width;
 
+	int index = 0;
 	for (int u = 0; u < height; u++) {
 		for (int v = 0; v < width; v++) {
 			for (int x = 0; x < height; x++) {
@@ -90,6 +89,8 @@ bool DFT2::dft2(double matrix[], int width, int height) {
 					m_dft2_matrix[v + u * width] = m_dft2_matrix[v + u * width] + cplTemp;
 				}
 			}
+			index += 1;
+			printf("Complete %d pixels\n", index);
 		}
 	}
 
@@ -151,33 +152,39 @@ void DFT2::generate_spectrum() {
 	}
 }
 
+void DFT2::log_spectrum() {
+	for (int u = 0; u < m_dft_matrix_height; u++) {
+		for (int v = 0; v < m_dft_matrix_width; v++) {
+			m_spectrum_data[v + u * m_dft_matrix_width] = log2(m_spectrum_data[v + u * m_dft_matrix_width] + 1);
+		}
+	}
+}
+
 void DFT2::normalize_spectrum() {
 	if (m_has_dft_matrix && (NULL != m_dft2_matrix) && ((m_dft_matrix_height * m_dft_matrix_width) > 0) && ((NULL != m_spectrum_data))) {
 		// get max value
 		double max = 0;
+		double min = 0;
 		for (int u = 0; u < m_dft_matrix_height; u++) {
 			for (int v = 0; v < m_dft_matrix_width; v++) {
 				if (m_spectrum_data[v + u * m_dft_matrix_width] > max) {
 					max = m_spectrum_data[v + u * m_dft_matrix_width];
 				}
-			}
-		}
-
-		// normalize
-		if (max <= 0) {
-			printf("Dft2D::NormalizeSpectrum() max value is incorrect! function aborts.\n");
-			return;
-		}
-		else {
-			for (int u = 0; u < m_dft_matrix_height; u++) {
-				for (int v = 0; v < m_dft_matrix_width; v++) {
-					m_spectrum_data[v + u * m_dft_matrix_width] = (255 * m_spectrum_data[v + u * m_dft_matrix_width]) / max;
+				if (m_spectrum_data[v + u * m_dft_matrix_width] < min) {
+					min = m_spectrum_data[v + u * m_dft_matrix_width];
 				}
 			}
 		}
-		m_is_normalized = true;
 
-		printf("max: %lf\n", max);
+		
+	
+		for (int u = 0; u < m_dft_matrix_height; u++) {
+			for (int v = 0; v < m_dft_matrix_width; v++) {
+				m_spectrum_data[v + u * m_dft_matrix_width] = 255 * (m_spectrum_data[v + u * m_dft_matrix_width] - min) / (max - min);
+			}
+		}
+
+		m_is_normalized = true;
 	}
 	else
 		m_is_normalized = false;
@@ -195,8 +202,6 @@ void DFT2::shift_spectrum_to_center()
 
 		for (int u = 0; u < m_dft_matrix_height; u++) {
 			for (int v = 0; v < m_dft_matrix_width; v++) {
-				//sprintf(msg+6, "%d, %d, tempData: %lf", u+1, v+1, tempData[v+u*m_nDftMatrixWidth]);
-				//OutputDebugStringA(msg);
 				if ((u < (m_dft_matrix_height / 2)) && (v < (m_dft_matrix_width / 2))) {
 					m_spectrum_data[v + u * m_dft_matrix_width] =
 						tempData[m_dft_matrix_width / 2 + v + (m_dft_matrix_height / 2 + u) * m_dft_matrix_width];
@@ -219,5 +224,16 @@ void DFT2::shift_spectrum_to_center()
 
 		if (tempData)
 			delete[] tempData;
+	}
+}
+
+void DFT2::get_two_part() {
+	real_part = new double[m_dft_matrix_height * m_dft_matrix_width];
+	imaginary_part = new double[m_dft_matrix_height * m_dft_matrix_width];
+	for (int i = 0; i < m_dft_matrix_height; i++) {
+		for (int j = 0; j < m_dft_matrix_width; j++) {
+			real_part[i * m_dft_matrix_width + j] = m_dft2_matrix[i * m_dft_matrix_width + j].m_rl;
+			imaginary_part[i * m_dft_matrix_width + j] = m_dft2_matrix[i * m_dft_matrix_width + j].m_im;
+		}
 	}
 }

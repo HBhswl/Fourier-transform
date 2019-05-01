@@ -15,6 +15,7 @@ public:
 	bool idft2(LPVOID *pMatrix, int *width, int *height);
 
 	void generate_spectrum();	// 对变换结果求模、生成频谱
+	void log_spectrum();		// 取对数
 	void normalize_spectrum();  // 对频谱进行归一化操作
 
 	bool has_dft2_matrix();		// 是否已经存在变换结果
@@ -25,9 +26,12 @@ public:
 	void print_spectrum();		// 打印频谱
 	void shift_spectrum_to_center();	// 将频谱原点平移到图像中心
 
+	void get_two_part();		// 得到实部和虚部谱
 public:
 	CComplexNumber *m_dft2_matrix;
-	double	*m_spectrum_data;
+	double* m_spectrum_data;
+	double* real_part;
+	double* imaginary_part;
 
 protected:
 	bool m_has_dft_matrix;
