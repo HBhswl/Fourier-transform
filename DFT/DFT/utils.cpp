@@ -19,7 +19,7 @@ Mat Rgb2Gray(Mat img) {
 void Mat2Double(Mat img, double* input) {
 	for (int i = 0; i < img.rows; i++) {
 		for (int j = 0; j < img.cols; j++) {
-			if (1)
+			if ((i + j) % 2 == 0)
 				input[i * img.cols + j] = (double)img.at<uchar>(i, j);
 			else
 				input[i * img.cols + j] = -(double)img.at<uchar>(i, j);

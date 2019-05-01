@@ -16,8 +16,7 @@ int main() {
 	// test_dft1();
 	// test_dft2();
 
-	// Mat img = imread("D:/My_code/C++/Fourier-transform/lufei.png");
-	Mat img = imread("C:/Users/lenovo/Desktop/lena.png");
+	Mat img = imread("D:/My_code/C++/Fourier-transform/images/lufei.png");
 	imshow("img", img);
 	waitKey(0);
 
@@ -38,7 +37,6 @@ int main() {
 	DFT2 dft2;
 	dft2.dft2(input, cols, rows);
 	dft2.generate_spectrum();
-	dft2.normalize_spectrum();
 	dft2.log_spectrum();
 	dft2.normalize_spectrum();
 	
