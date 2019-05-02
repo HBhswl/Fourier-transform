@@ -150,13 +150,12 @@ $$
 $$
 \alpha(u) =
 \begin{cases}
-\frac{1}{\sqrt(M)} & \text{u = 0} \\[2ex]
+\frac{1}{\sqrt(M)} & \text{u = 0} \\
 \sqrt{\frac{2}{M}} & \text{u $\neq$ 0}
 \end{cases}
-
 \alpha(v) =
 \begin{cases}
-\frac{1}{\sqrt(M)} & \text{v = 0} \\[2ex]
+\frac{1}{\sqrt(M)} & \text{v = 0} \\
 \sqrt{\frac{2}{M}} & \text{v $\neq$ 0}
 \end{cases}
 $$
@@ -170,13 +169,12 @@ $$
 $$
 \alpha(u) =
 \begin{cases}
-\frac{1}{\sqrt(M)} & \text{u = 0} \\[2ex]
+\frac{1}{\sqrt(M)} & \text{u = 0} \\
 \sqrt{\frac{2}{M}} & \text{u $\neq$ 0}
 \end{cases}
-
 \alpha(v) =
 \begin{cases}
-\frac{1}{\sqrt(M)} & \text{v = 0} \\[2ex]
+\frac{1}{\sqrt(M)} & \text{v = 0} \\
 \sqrt{\frac{2}{M}} & \text{v $\neq$ 0}
 \end{cases}
 $$
