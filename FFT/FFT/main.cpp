@@ -1,80 +1,62 @@
-﻿#include "FFT1.h"
-#include "FFT2.h"
+﻿#include <core/core.hpp>
+#include <highgui/highgui.hpp>
+#include <opencv2\opencv.hpp>
+#include <opencv2\imgproc\imgproc.hpp>
 #include <string.h>
-#include <stdio.h>
+#include "FFT2.h"
+#include <ctime>
 
-void test_fft1() {
-	double vec[] = { 15, 32, 9, 222, 118, 151, 5, 7, 56, 233, 56, 121, 235, 89, 98, 111 };
-	int len = sizeof(vec) / sizeof(double);
+using namespace cv;
 
-	Complex* inVec = new Complex[len];
-	Complex* outVec = new Complex[len];
-	Complex* invert = new Complex[len];
-
-	memset(inVec, 0, len * sizeof(Complex));
-	for (int i = 0; i < len; i++)
-		inVec[i].rl = vec[i];
-
-	// Fourier transformation
-	FFT1 t;
-	t.fft(inVec, len, outVec);
-
-	// print result
-	printf("���ٸ���Ҷ�任���Ϊ��\n");
-	for (int i = 0; i < len; i++) {
-		if (outVec[i].im < 0)
-			printf("result[%d]: %lf - %lfi\n", i + 1, outVec[i].rl, -outVec[i].im);
-		else
-			printf("result[%d]: %lf + %lfi\n", i + 1, outVec[i].rl, outVec[i].im);
-	}
-
-	printf("11111 ��任���Ϊ��");
-	t.ifft(outVec, len, invert);
-	for (int i = 0; i < len; i++) {
-		printf("ifft[%d]: %lf\n", i + 1, invert[i].rl);
-	}
-
-	delete[] inVec;
-	delete[] outVec;
-	delete[] invert;
-}
-
-void test_fft2() {
-	int width = 4;
-	int height = 4;
-
-	double mat[] = {1, 1, 3, 2, 3, 4, 123, 154, 55, 2, 22, 233, 5, 6, 2, 7};
-
-	Complex* inVec = new Complex[width * height];
-	Complex* outVec = new Complex[width * height];
-	Complex* invert = new Complex[width * height];
-
-	memset(inVec, 0, width * height * sizeof(Complex));
-	for (int i = 0; i < width * height; i++)
-		inVec[i].rl = mat[i];
-
-	// Fourier transformation
-	FFT2 t;
-	t.fft(inVec, width, height, outVec);
-
-	// print result
-	printf("���ٸ���Ҷ�任���Ϊ��\n");
-	for (int i = 0; i < width * height; i++) {
-		if (outVec[i].im < 0)
-			printf("result[%d]: %lf - %lfi\n", i + 1, outVec[i].rl, -outVec[i].im);
-		else
-			printf("result[%d]: %lf + %lfi\n", i + 1, outVec[i].rl, outVec[i].im);
-	}
-	printf("11111 ��任���Ϊ��");
-	t.ifft(outVec, width, height, invert);
-	for (int i = 0; i < width * height; i++) {
-		printf("ifft[%d]: %lf\n", i + 1, invert[i].rl);
-	}
-}
+void test_fft2();
+void test_fft1();
+Mat Rgb2Gray(Mat img);
+void Mat2Double(Mat img, double* input, int centering);
+Mat Double2Mat(double* input, int rows, int cols);
 
 int main() {
-	test_fft2();
+	// test_fft2();
 	// test_fft1();
+
+	// show the original picture
+	Mat img = imread("D:/My_code/C++/Fourier-transform/images/lufei.png");
+	imshow("img", img);
+	waitKey(0);
+
+	// transform it to gray
+	Mat Gray = Rgb2Gray(img);
+	imshow("Gray", Gray);
+	waitKey(0);
+
+	// resize the picture to sutable size.
+	Mat dst;
+	resize(Gray, dst, Size(512, 512));
+	imshow("DST", dst);
+	waitKey(0);
+
+	int rows = dst.rows;
+	int cols = dst.cols;
+	double* input = new double[rows * cols];
+
+	Mat2Double(dst, input, 1);
+	FFT2 fft2(input, cols, rows);
+
+	clock_t startTime, endTime;
+	startTime = clock();
+	fft2.do_fft();
+	endTime = clock();
+	printf("Time used = %lf s", (double)(endTime - startTime) / CLOCKS_PER_SEC);
+
+	fft2.do_generate_spectrum();
+	fft2.do_log_spectrum();
+	fft2.do_normalize_spectrum();
+
+	double* output = fft2.output;
+	
+	dst = Double2Mat(output, rows, cols);
+	imshow("spec", dst);
+	waitKey(0);
+
 	return 0;
 }
 

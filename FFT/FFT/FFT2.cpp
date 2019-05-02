@@ -8,6 +8,33 @@ FFT2::FFT2(void)
 {
 }
 
+FFT2::FFT2(double* arr, int width, int height) {
+	int num_of_all_pixels = width * height;
+
+	cols = width;
+	rows = height;
+
+	invec = new Complex[num_of_all_pixels];
+	outvec = new Complex[num_of_all_pixels];
+
+	input = arr;
+	output = new double[num_of_all_pixels];
+	real = new double[num_of_all_pixels];
+	imaginary = new double[num_of_all_pixels];
+
+	memset(invec, 0, sizeof(Complex) * num_of_all_pixels);
+	memset(outvec, 0, sizeof(Complex) * num_of_all_pixels);
+	memset(output, 0, sizeof(double) * num_of_all_pixels);
+	memset(real, 0, sizeof(double) * num_of_all_pixels);
+	memset(imaginary, 0, sizeof(double) * num_of_all_pixels);
+
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			invec[i * width + j].rl = input[i * width + j];
+		}
+	}
+}
+
 FFT2::~FFT2(void)
 {
 }
@@ -130,3 +157,49 @@ bool FFT2::ifft(Complex inVec[], int width, int height, Complex outVec[])
 	return true;
 }
 
+void FFT2::do_fft(){
+	fft(invec, cols, rows, outvec);
+}
+
+void FFT2::do_ifft(){
+	ifft(outvec, cols, rows, invec);
+}
+
+void FFT2::do_generate_spectrum(){
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			double a = outvec[i * cols + j].rl;
+			double b = outvec[i * cols + j].im;
+			output[i * cols + j] = sqrt(a * a + b * b);
+		}
+	}
+}
+
+void FFT2::do_log_spectrum(){
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			double num = output[i * cols + j];
+			output[i * cols + j] = log2(num + 1);
+		}
+	}
+}
+
+void FFT2::do_normalize_spectrum(){
+	double min = 999999;
+	double max = 0;
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			double num = output[i * cols + j];
+			if (num > max)
+				max = num;
+			if (num < min)
+				min = num;
+		}
+	}
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			double num = output[i * cols + j];
+			output[i * cols + j] = 255 * (num - min) / (max - min);
+		}
+	}
+}

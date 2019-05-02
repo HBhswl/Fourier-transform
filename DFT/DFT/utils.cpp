@@ -16,13 +16,18 @@ Mat Rgb2Gray(Mat img) {
 	return Gray;
 }
 
-void Mat2Double(Mat img, double* input) {
+void Mat2Double(Mat img, double* input, int centering) {
 	for (int i = 0; i < img.rows; i++) {
 		for (int j = 0; j < img.cols; j++) {
-			if ((i + j) % 2 == 0)
+			if (centering) {
+				if ((i + j) % 2 == 0)
+					input[i * img.cols + j] = (double)img.at<uchar>(i, j);
+				else
+					input[i * img.cols + j] = -(double)img.at<uchar>(i, j);
+			}
+			else {
 				input[i * img.cols + j] = (double)img.at<uchar>(i, j);
-			else
-				input[i * img.cols + j] = -(double)img.at<uchar>(i, j);
+			}
 		}
 	}
 }

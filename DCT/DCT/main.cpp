@@ -1,56 +1,74 @@
 #include "DCT1.h"
 #include "DCT2.h"
 #include <stdio.h>
+#include <core/core.hpp>
+#include <highgui/highgui.hpp>
+#include <opencv2\opencv.hpp>
+#include <opencv2\imgproc\imgproc.hpp>
+#include <ctime>
 
-void test_dct1() {
-	double signal[] = { 15, 32, 9, 222, 18, 151, 5, 7, 56, 233, 56, 121, 235, 89, 98, 111 };
-	int size = sizeof(signal) / sizeof(double);
-	
-	double* outVec = new double[size];
-	double* invert = new double[size];
-	DCT1 dct;
-	dct.dct(signal, size, outVec);
+using namespace cv;
 
-	printf("DCT变换结果如下：\n");
-	for (int i = 0; i < size; i++) {
-		printf("%2d : %lf\n", i, outVec[i]);
-	}
+void test_dct1();
+void test_dct2();
+Mat Rgb2Gray(Mat img);
+void Mat2Double(Mat img, double* input, int centering);
+Mat Double2Mat(double* input, int rows, int cols);
 
-	dct.idct(outVec, size, invert);
-	
-	printf("DCT逆变换结果如下：\n");
-	for (int i = 0; i < size; i++) {
-		printf("%2d : %lf\n", i, invert[i]);
-	}
-}
 
-void test_dct2() {
-	int width = 4;
-	int height = 4;
-
-	double mat[] = { 1, 1, 3, 2, 3, 4, 123, 154, 55, 2, 22, 233, 5, 6, 2, 7 };
-	double* outVec = new double[width * height];
-	double* invert = new double[width * height];
-
-	DCT2 dct;
-
-	dct.dct(mat, width, height, outVec);
-
-	printf("DCT变换结果如下：\n");
-	for (int i = 0; i < width * height; i++) {
-		printf("%2d : %lf\n", i, outVec[i]);
-	}
-
-	dct.idct(outVec, width, height, invert);
-
-	printf("DCT逆变换结果如下：\n");
-	for (int i = 0; i < width * height; i++) {
-		printf("%2d : %lf\n", i, invert[i]);
-	}
-}
 
 int main() {
 	// test_dct1();
-	test_dct2();
+	// test_dct2();
+
+	// show the original picture
+	
+	// Mat img = imread("D:/My_code/C++/Fourier-transform/images/lufei.png");
+	Mat img = imread("C:/Users/lenovo/Desktop/lena.png");
+	imshow("img", img);
+	waitKey(0);
+
+	// transform it to gray
+	Mat Gray = Rgb2Gray(img);
+	imshow("Gray", Gray);
+	waitKey(0);
+
+	// resize the picture to sutable size.
+	Mat dst;
+	resize(Gray, dst, Size(256, 256));
+	imshow("DST", dst);
+	waitKey(0);
+
+	int rows = dst.rows;
+	int cols = dst.cols;
+	double* input = new double[rows * cols];
+
+	Mat2Double(dst, input, 0);
+	DCT2 dct2(input, cols, rows);
+
+	clock_t startTime, endTime;
+	startTime = clock();
+	dct2.do_dct();
+	endTime = clock();
+	printf("Time used = %lf s\n", (double)(endTime - startTime) / CLOCKS_PER_SEC);
+
+	dct2.do_normalize();
+	dct2.do_log();
+	dct2.do_normalize();
+
+	double* output = dct2.output;
+
+	
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			printf("%lf\n", output[i * cols + j]);
+		}
+	}
+	
+
+	dst = Double2Mat(output, rows, cols);
+	imshow("spec", dst);
+	waitKey(0);
+
 	return 0;
 }

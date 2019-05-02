@@ -164,7 +164,7 @@ void DFT2::normalize_spectrum() {
 	if (m_has_dft_matrix && (NULL != m_dft2_matrix) && ((m_dft_matrix_height * m_dft_matrix_width) > 0) && ((NULL != m_spectrum_data))) {
 		// get max value
 		double max = 0;
-		double min = 0;
+		double min = 999999999;
 		for (int u = 0; u < m_dft_matrix_height; u++) {
 			for (int v = 0; v < m_dft_matrix_width; v++) {
 				if (m_spectrum_data[v + u * m_dft_matrix_width] > max) {
