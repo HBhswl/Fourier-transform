@@ -74,7 +74,7 @@ void Mat2Double(cv::Mat img, double* input, int centering) {
 					input[i * img.cols + j] = -(double)img.at<uchar>(i, j);
 			}
 			else {
-				input[i * img.cols + j] = (double)img.at<uchar>(i, j);
+				input[i * img.cols + j] = (double)img.at<uchar>(i, j) - 128;
 			}
 		}
 	}
@@ -88,4 +88,16 @@ cv::Mat Double2Mat(double* input, int rows, int cols) {
 		}
 	}
 	return Gray;
+}
+
+void processing(double* input, int rows, int cols, double ave) {
+	double ratio = 0.5;
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			if (input[i * cols + j] < ave + 1)
+				input[i * cols + j] = 0; // input[i * cols + j] * ratio;
+			else
+				input[i * cols + j] = 255 - (255 - input[i * cols + j]) / (255 - ave) * (255 - ave * ratio);
+		}
+	}
 }

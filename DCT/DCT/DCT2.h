@@ -16,7 +16,8 @@ public:
 	void do_idct();
 	void do_log();
 	void do_exp();
-	void do_normalize();
+	void do_normalize(double maxNumber);
+	void do_translation();
 
 public:
 	double* input;

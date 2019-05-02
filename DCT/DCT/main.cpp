@@ -14,7 +14,7 @@ void test_dct2();
 Mat Rgb2Gray(Mat img);
 void Mat2Double(Mat img, double* input, int centering);
 Mat Double2Mat(double* input, int rows, int cols);
-
+void processing(double* input, int rows, int cols, double ave);
 
 
 int main() {
@@ -50,12 +50,26 @@ int main() {
 	dct2.do_dct();
 	endTime = clock();
 	printf("Time used = %lf s\n", (double)(endTime - startTime) / CLOCKS_PER_SEC);
-
-	dct2.do_normalize();
-	dct2.do_log();
-	dct2.do_normalize();
+	
+	// dct2.do_translation();
+	// dct2.do_log();
+	// dct2.do_normalize(1);
+	// dct2.do_exp();
+	dct2.do_normalize(255);
 
 	double* output = dct2.output;
+
+	double total = 0;
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			// printf("%.1f ", output[i * cols + j]);
+			total += output[i * cols + j];
+		}
+		printf("\n");
+	}
+	// printf("ave = %lf \n", total / cols / rows);
+	processing(output, rows, cols, total / cols / rows);
+	
 
 	dst = Double2Mat(output, rows, cols);
 	imshow("spec", dst);

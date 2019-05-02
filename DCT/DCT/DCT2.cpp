@@ -134,12 +134,14 @@ void DCT2::do_exp() {
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
 			double num = output[i * cols + j];
-			output[i * cols + j] = pow(2, num);
+			output[i * cols + j] = pow(30, 1 + num);
 		}
 	}
 }
 
-void DCT2::do_normalize() {
+
+
+void DCT2::do_normalize(double maxNumber) {
 	double min = 999999;
 	double max = -999999;
 	for (int i = 0; i < rows; i++) {
@@ -156,7 +158,30 @@ void DCT2::do_normalize() {
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
 			double num = output[i * cols + j];
-			output[i * cols + j] = 255 * (num - min) / (max - min);
+			output[i * cols + j] = maxNumber * (num - min) / (max - min);
+		}
+	}
+}
+
+void DCT2::do_translation()
+{
+	double min = 999999;
+	double max = -999999;
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			double num = output[i * cols + j];
+			if (num > max)
+				max = num;
+			if (num < min)
+				min = num;
+		}
+	}
+	printf("the max is %lf \n", max);
+	printf("the min is %lf \n", min);
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			double num = output[i * cols + j];
+			output[i * cols + j] = num - min;
 		}
 	}
 }

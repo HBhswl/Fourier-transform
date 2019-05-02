@@ -194,3 +194,7 @@ $$
 ​    It is found here that the result of the discrete cosine transform is inconsistent with the result of the Fourier transform, which has the highest frequency in the upper left corner, and the Fourier transform is scattered in four corners.
 
 ​    The effect of the discrete cosine transform in the above figure may not be very good. Most of the points are gray, while there are very few high-frequency points in the upper left corner. The reason for the analysis may be when doing $log$ transformation. Caused, but when using other functions to transform, can not achieve a better display, it still retains the same $log$ function as the Fourier transform.
+
+In order to have a better display effect, the average upper and lower bounds are used to make a certain mapping on the average upper and lower data, so as to obtain a clearer data display effect, and the following schematic diagram is obtained. The bright spots in the upper left corner of the image can be seen relatively clearly.
+
+![DCT processed](./images/DCT2.png)
