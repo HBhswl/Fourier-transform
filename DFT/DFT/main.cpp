@@ -29,7 +29,7 @@ int main() {
 
 	// resize the picture to suitable size.
 	Mat dst;
-	resize(Gray, dst, Size(128, 128));
+	resize(Gray, dst, Size(256, 256));
 	imshow("DST", dst);
 	waitKey(0);
 
@@ -37,7 +37,7 @@ int main() {
 	int cols = dst.cols;
 	double* input = new double[rows * cols];
 
-	Mat2Double(dst, input, 0);
+	Mat2Double(dst, input, 1);
 	DFT2 dft2;
 	
 	// calculate the time used

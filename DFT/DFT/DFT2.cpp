@@ -90,7 +90,8 @@ bool DFT2::dft2(double matrix[], int width, int height) {
 				}
 			}
 			index += 1;
-			printf("Complete %d pixels\n", index);
+			if (index % 1000 == 0)
+				printf("Complete %d pixels\n", index);
 		}
 	}
 

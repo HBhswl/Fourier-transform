@@ -30,7 +30,7 @@ int main() {
 
 	// resize the picture to sutable size.
 	Mat dst;
-	resize(Gray, dst, Size(512, 512));
+	resize(Gray, dst, Size(256, 256));
 	imshow("DST", dst);
 	waitKey(0);
 

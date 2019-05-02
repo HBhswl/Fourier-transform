@@ -23,8 +23,7 @@ int main() {
 
 	// show the original picture
 	
-	// Mat img = imread("D:/My_code/C++/Fourier-transform/images/lufei.png");
-	Mat img = imread("C:/Users/lenovo/Desktop/lena.png");
+	Mat img = imread("D:/My_code/C++/Fourier-transform/images/lufei.png");
 	imshow("img", img);
 	waitKey(0);
 
@@ -57,14 +56,6 @@ int main() {
 	dct2.do_normalize();
 
 	double* output = dct2.output;
-
-	
-	for (int i = 0; i < rows; i++) {
-		for (int j = 0; j < cols; j++) {
-			printf("%lf\n", output[i * cols + j]);
-		}
-	}
-	
 
 	dst = Double2Mat(output, rows, cols);
 	imshow("spec", dst);
